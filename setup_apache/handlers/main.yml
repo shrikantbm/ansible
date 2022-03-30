@@ -1,0 +1,11 @@
+---
+# handlers file for setup_apache
+- name: start the httpd service
+  service:
+    name: httpd
+    state: started
+
+- name: start the ntp service
+  service:
+    name: ntpd
+    state: started

@@ -1,0 +1,13 @@
+---
+- name: Install the packages
+  hosts: all 
+  become: true
+  tasks:
+    - name: install the telnet packages
+      yum: 
+        name: telnet
+        state: latest
+    - name: install the git packages
+      yum:
+        name: git
+        state: latest

@@ -1,0 +1,28 @@
+---
+- name: this script download and install
+  hosts: all
+  become: true
+  tasks:
+    - name: download the tomcat packages
+      get_url:
+        url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.60/bin/apache-tomcat-9.0.60.tar.gz
+        dest: /opt
+        validate_certs: false
+
+    - name: unzip the tomcat
+      unarchive:
+         src: /opt/apache-tomcat-9.0.60.tar.gz
+         dest: /opt
+         remote_src: yes
+
+    - name: add the permission to start up script
+      file:
+        path: /opt/apache-tomcat-9.0.60/bin/startup.sh
+        mode: 0777
+
+    - name: start the tomcat
+      shell: nohup ./startup.sh
+      args: 
+        chdir: /opt/apache-tomcat-9.0.60/bin/
+
+

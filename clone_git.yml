@@ -1,0 +1,11 @@
+---
+- name: playbook to clone with git
+  hosts: all
+  become: true
+  vars_files:
+    - git_pass.yml
+  tasks:
+    - name: clone a repo
+      git:
+        repo: https://shrikantbm:{{ password }}@github.com/shrikantbm/vault.git
+        dest: /data1/ansible/test-vault

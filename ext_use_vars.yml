@@ -1,0 +1,10 @@
+---
+- name: create the user from ext
+  hosts: all
+  become: true
+  vars_files:
+    user.yml
+  tasks:
+    - name: create the user {{ user }}
+      user: 
+        name: "{{ user }}"

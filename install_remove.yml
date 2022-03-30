@@ -1,0 +1,23 @@
+---
+- name: install start and remove
+  hosts: all 
+  become: true
+  vars:
+    packages:
+      - git
+      - httpd
+  tasks:
+    - name: Install the packages
+      yum:
+        name: "{{packages}}"
+        state: latest
+      notify: start the httpd
+    - name: Remove the git
+      yum:
+        name: git
+        state: absent
+  handlers:
+    - name: start the httpd
+      service:
+        name: httpd
+        state: started

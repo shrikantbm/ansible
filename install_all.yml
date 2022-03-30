@@ -1,0 +1,17 @@
+---
+- name: install the packages
+  hosts: all
+  become: true
+  vars:
+    packages:
+    - httpd
+  tasks:
+    - name: install the desired packages
+      yum:
+        name: "{{packages}}"
+        state: latest
+        update_cache: true
+    - name: start the httpd service
+      service:
+        name: httpd
+        state: started 

@@ -1,0 +1,41 @@
+---
+- name: add all tasks in one
+  hosts: all
+  become: true
+  vars:
+    packages:
+      - net-tools
+      - wget
+      - httpd
+      - ntp
+    user:
+      - Aman
+  tasks:
+    - name: install the packages
+      yum:
+        name: "{{ packages }}"
+        state: installed
+      notify: start the services
+
+    - name: download the packages
+      get_url:
+        url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.60/bin/apache-tomcat-9.0.60.tar.gz
+        dest: /var 
+        validate_certs: false
+
+    - name: copy a file
+      copy:
+        src: /data1/ansible/index.html
+        dest: /home/sheetal
+
+
+  handlers:
+    - name: start the httpd service
+      service:
+        name: httpd
+        state: started
+
+    - name: start the ntp service
+      service:
+        name: ntpd
+        state: started

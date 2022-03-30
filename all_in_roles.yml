@@ -1,0 +1,6 @@
+---
+- name: this is playbook ansible roles
+  hosts: all
+  become: true
+  roles:
+    - setup_apache

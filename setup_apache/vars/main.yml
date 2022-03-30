@@ -1,0 +1,9 @@
+---
+# vars file for setup_apache
+packages:
+  - net-tools
+  - wget
+  - httpd
+  - ntp
+user:
+  - Aman
